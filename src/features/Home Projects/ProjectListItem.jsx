@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { Button, Icon, Item, List, Segment } from 'semantic-ui-react';
 import ProjectInfo from './ProjectInfo';
 
@@ -6,9 +7,10 @@ export default function ProjectListItem({project}){
     return (
         
         <>
-            <Segment.Group>
+        <Item.Group >
+            <Segment.Group >
                 <Segment>
-                    <Item.Group>
+                    <Item.Group link as={NavLink} to={`/projects/${project.id}`} >
                         <Item>
                             <Item.Image size='tiny' circular src={project.hostPhotoURL}/>
                             <Item.Content>
@@ -34,9 +36,12 @@ export default function ProjectListItem({project}){
                 </Segment>
                 <Segment clearing>
                     <div>{project.description}</div>
-                    <Button icon='like'  floated='right'></Button>
+                    <Button floated='right'>Lookey lookey</Button>
+                    <Button icon='share'  floated='right'></Button>
+                    <Button icon='like' color='blue' floated='right'></Button>
                 </Segment>
             </Segment.Group>
+            </Item.Group>
 </>
     )
 }
