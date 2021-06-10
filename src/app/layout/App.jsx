@@ -7,6 +7,7 @@ import HomeProjects from "../../features/Home Projects/HomeProjects";
 
 import NavBar from "../../features/Nav/NavBar";
 import ProjectDetailedPage from "../../features/projectDetailed/ProjectDetailedPage";
+import Sandbox from "../../features/sandbox/Sandbox";
 import StudioPage from "../../features/Studio/StudioPage";
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
             <NavBar />
             <Container className='main'>
               <Route path='/home' component={HomeProjects} />
+              <Route exact path='/sandbox' component={Sandbox} />
               <Route path='/browse' component={BrowseProjects} />
               <Route path='/studio' component={StudioPage} />
               <Route

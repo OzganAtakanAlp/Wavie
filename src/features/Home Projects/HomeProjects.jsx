@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid, GridColumn } from "semantic-ui-react";
 import ProjectList from "./ProjectList";
-import { sampleData } from "../../app/api/sampleData";
+import { useSelector } from "react-redux";
 
 export default function HomeProjects() {
-  const [projects, setEvents] = useState(sampleData);
+  const { projects } = useSelector((state) => state.project);
 
   return (
     <Grid>

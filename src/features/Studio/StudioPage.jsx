@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Grid, Menu, Segment } from "semantic-ui-react";
 import CollabProjectsList from "./CollabProjectsList";
-import { sampleData } from "../../app/api/sampleData";
+import { useSelector } from "react-redux";
 
 export default function StudioPage() {
-  const [projects, setEvents] = useState(sampleData);
+  const { projects } = useSelector((state) => state.project);
 
   return (
     <Grid>
