@@ -9,10 +9,12 @@ import NavBar from "../../features/Nav/NavBar";
 import ProjectDetailedPage from "../../features/projectDetailed/ProjectDetailedPage";
 import Sandbox from "../../features/sandbox/Sandbox";
 import StudioPage from "../../features/Studio/StudioPage";
+import ModalManager from "../common/modals/ModalManager";
 
 export default function App() {
   return (
     <>
+      <ModalManager />
       <Route exact path='/' component={GreetingsPage} />
       <Route
         path={"/(.+)"}
