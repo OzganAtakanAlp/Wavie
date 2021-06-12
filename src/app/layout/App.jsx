@@ -1,5 +1,6 @@
 import React from "react";
 import { Route } from "react-router";
+import { ToastContainer } from "react-toastify";
 import { Container } from "semantic-ui-react";
 import BrowseProjects from "../../features/Browse Projects/BrowseProjects";
 import GreetingsPage from "../../features/Greetings Page/GreetingsPage";
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <>
       <ModalManager />
+      <ToastContainer position='bottom-right' hideProgressBar />
       <Route exact path='/' component={GreetingsPage} />
       <Route
         path={"/(.+)"}
