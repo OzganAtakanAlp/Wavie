@@ -35,6 +35,7 @@ export default function eventReducer(state = initialState, { type, payload }) {
         ...state,
         projects: payload,
       };
+
     default:
       return state;
   }

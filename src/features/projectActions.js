@@ -11,7 +11,7 @@ import {
   FETCH_PROJECTS,
 } from "./projectConstants";
 
-export function loadEvents() {
+export function loadProjects() {
   return async function (dispatch) {
     dispatch(asyncActionStart());
     try {
@@ -21,6 +21,13 @@ export function loadEvents() {
     } catch (error) {
       dispatch(asyncActionError(error));
     }
+  };
+}
+
+export function listenToProjects(projects) {
+  return {
+    type: FETCH_PROJECTS,
+    payload: projects,
   };
 }
 

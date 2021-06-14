@@ -1,12 +1,12 @@
-import React from 'react';
-import CollabProjectsListItem from './CollabProjectsListItem';
+import React from "react";
+import CollabProjectsListItem from "./CollabProjectsListItem";
 
-export default function CollabProjectsList ({projects}) {
-     return(
-         <>
-         {projects.map(project => (
-             <CollabProjectsListItem project={project} key={project.id} />
-         ))}
-         </>
-     )
+export default function CollabProjectsList({ versions }) {
+  return (
+    <>
+      {versions.map((project) => (
+        <CollabProjectsListItem versions={versions} key={versions.id} />
+      ))}
+    </>
+  );
 }

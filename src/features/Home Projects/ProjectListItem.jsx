@@ -5,7 +5,7 @@ import { Button, Icon, Item, List, Segment } from "semantic-ui-react";
 import { deleteProject } from "../projectActions";
 import ProjectInfo from "./ProjectInfo";
 
-export default function ProjectListItem({ project }) {
+export default function ProjectListItem({ project, versions }) {
   const dispatch = useDispatch();
 
   return (
@@ -17,7 +17,9 @@ export default function ProjectListItem({ project }) {
               <Item>
                 <Item.Image size='tiny' circular src={project.hostPhotoURL} />
                 <Item.Content>
-                  <Item.Header content={project.title} />
+                  <Item.Header
+                    content={project.project_settings_static.project_name}
+                  />
                   <Item.Description>Circle rock mix</Item.Description>
                 </Item.Content>
               </Item>
@@ -25,13 +27,14 @@ export default function ProjectListItem({ project }) {
           </Segment>
           <Segment>
             <span>
-              <Icon name='clock' /> {project.date}
-              <Icon name='marker' /> {project.venue}
+              <Icon name='clock' />{" "}
+              {project.project_settings_static.date_created}
+              <Icon name='marker' />
             </span>
           </Segment>
           <Segment secondary>
             <List horizontal>
-              <ProjectInfo />
+              <ProjectInfo versions={versions} />
             </List>
           </Segment>
           <Segment clearing>
