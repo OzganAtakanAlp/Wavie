@@ -9,21 +9,28 @@ import {
 } from "../../app/async/asyncReducer";
 import {
   dataFromSnapshot,
+  getProjectsFromFirestore,
   getVersionsFromFirestore,
 } from "../../app/firestore/firestoreService";
 import { listenToVersions } from "../versionActions";
+import { listenToProjects } from "../projectActions";
+import { Link } from "react-router-dom";
+import ProjectListItemPlaceholder from "../Home Projects/ProjectListItemPlaceholder";
 
 export default function StudioPage() {
   const { projects } = useSelector((state) => state.project);
   const { versions } = useSelector((state) => state.versions);
+  const { currentUser } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.async);
   const dispatch = useDispatch();
+  // const uid = currentUser.uid;
 
   useEffect(() => {
     dispatch(asyncActionStart());
-    const unsubscribe = getVersionsFromFirestore({
+    const unsubscribe = getProjectsFromFirestore({
       next: (snapshot) => {
         dispatch(
-          listenToVersions(
+          listenToProjects(
             snapshot.docs.map((docSnapshot) => dataFromSnapshot(docSnapshot))
           )
         );
@@ -43,7 +50,7 @@ export default function StudioPage() {
             <Menu.Header>Projects</Menu.Header>
 
             <Menu.Menu>
-              <Menu.Item name='All' />
+              <Menu.Item name='All' active={true} />
               <Menu.Item name='Solo' />
               <Menu.Item name='Group' />
             </Menu.Menu>
@@ -61,7 +68,13 @@ export default function StudioPage() {
       </Grid.Column>
       <Grid.Column stretched width={10}>
         <Segment>
-          <CollabProjectsList versions={versions} />
+          {loading && (
+            <>
+              <ProjectListItemPlaceholder />
+              <ProjectListItemPlaceholder />
+            </>
+          )}
+          <CollabProjectsList projects={projects} />
         </Segment>
       </Grid.Column>
       <Grid.Column width={3}></Grid.Column>

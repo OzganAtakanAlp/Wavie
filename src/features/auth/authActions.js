@@ -14,7 +14,7 @@ export function verifyAuth() {
       if (user) {
         dispatch(signInUser(user));
       } else {
-        dispatch(signOutUser);
+        dispatch(signOutUser());
       }
     });
   };

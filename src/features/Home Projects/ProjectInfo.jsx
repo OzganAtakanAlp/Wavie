@@ -1,23 +1,23 @@
-import React from "react";
-// import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Label, List } from "semantic-ui-react";
-// import {
-//   asyncActionStart,
-//   asyncActionFinish,
-//   asyncActionError,
-// } from "../../app/async/asyncReducer";
-// import {
-//   dataFromSnapshot,
-//   getVersionsFromFirestore,
-// } from "../../app/firestore/firestoreService";
-// import { listenToVersions } from "../projectActions";
+import {
+  asyncActionStart,
+  asyncActionFinish,
+  asyncActionError,
+} from "../../app/async/asyncReducer";
+import {
+  dataFromSnapshot,
+  getProjectInfo,
+  getVersionsFromFirestore,
+} from "../../app/firestore/firestoreService";
+import { listenToVersions } from "../versionActions";
 
 export default function ProjectInfo({ versions }) {
-  // const { versions } = useSelector((state) => state.version);
   // const dispatch = useDispatch();
   // useEffect(() => {
   //   dispatch(asyncActionStart());
-  //   const unsubscribe = getVersionsFromFirestore({
+  //   const unsubscribe = getProjectInfo({
   //     next: (snapshot) => {
   //       dispatch(
   //         listenToVersions(
@@ -33,7 +33,7 @@ export default function ProjectInfo({ versions }) {
   //   return unsubscribe;
   // }, [dispatch]);
 
-  console.log(versions);
+  // console.log(versions);
 
   return (
     <List.Item>

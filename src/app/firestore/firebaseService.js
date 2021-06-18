@@ -16,10 +16,9 @@ export async function registerWithFirebase(creds) {
     const result = await firebase
       .auth()
       .createUserWithEmailAndPassword(creds.email, creds.password);
-    await result.user.updateProfile({
+    return await result.user.updateProfile({
       displayName: creds.displayName,
     });
-    return await setUserProfileData(result.user);
   } catch (error) {
     throw error;
   }

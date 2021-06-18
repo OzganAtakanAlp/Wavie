@@ -14,6 +14,7 @@ export default function SignedInMenu() {
       await signOutFirebase();
       history.push("/");
     } catch (error) {
+      console.log(error);
       toast.error(error.message);
     }
   }
@@ -29,6 +30,12 @@ export default function SignedInMenu() {
         <Dropdown.Menu>
           <Dropdown.Item as={Link} to='/home' text='Create Event' icon='plus' />
           <Dropdown.Item to='/home' text='My profile' icon='user' />
+          <Dropdown.Item
+            as={Link}
+            to='/account'
+            text='Account'
+            icon='settings'
+          />
           <Dropdown.Item onClick={handleSignOut} text='Sign out' icon='power' />
         </Dropdown.Menu>
       </Dropdown>

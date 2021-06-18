@@ -17,7 +17,11 @@ export function getProjectsFromFirestore(observer, user) {
     .collection("Project")
     .where("__name__", ">", "25")
     .where("__name__", "<=", "29")
-    .where("project_settings_static.creator_id", "==", user)
+    .where(
+      "project_settings_static.creator_id",
+      "==",
+      "kBm6zJMHicgj4NA15pUeR903K2u2"
+    )
     .onSnapshot(observer);
 }
 // export function getProjectsFromFirestore(observer, user) {
@@ -39,12 +43,12 @@ export function getVersionsFromFirestore(observer) {
   return versions;
 }
 
-export function setUserProfileData(user) {
-  return db.collection("Person").doc(user.uid).set({
-    display_name: user.displayName,
-    email: user.email,
-  });
-}
+// export function setUserProfileData(user) {
+//   return db.collection("Person").doc(user.uid).set({
+//     displayName: user.displayName,
+//     email: user.email,
+//   });
+// }
 export function setUserProfileDataInDocument(user) {
   var personDocRef = db.collection("Person").doc(user.uid).set(
     {

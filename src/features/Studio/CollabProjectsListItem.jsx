@@ -1,15 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Item } from "semantic-ui-react";
 
-export default function CollabProjectsListItem({ versions }) {
+export default function CollabProjectsListItem({ projects }) {
+  const project = projects.project_settings_static;
+  console.log(project);
   return (
     <>
-      <Item.Group link>
+      <Item.Group as={Link} to={`/projectDetailed/:${project.id}`}>
         <Item>
-          <Item.Image size='tiny' src={versions.hostPhotoURL} />
+          <Item.Image size='tiny' />
           <Item.Content>
-            <Item.Header></Item.Header>
-            <Item.Description>{versions.date}</Item.Description>
+            <Item.Header>{project.project_name}</Item.Header>
+            <Item.Description>{project.date_created}</Item.Description>
           </Item.Content>
         </Item>
       </Item.Group>

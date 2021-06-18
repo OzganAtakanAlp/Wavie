@@ -7,7 +7,10 @@ import { Button, Label } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../app/common/modals/modalReducer";
 import { registerWithFirebase } from "../../app/firestore/firebaseService";
-import { setUserProfileData } from "../../app/firestore/firestoreService";
+import {
+  setUserProfileData,
+  updatePerson,
+} from "../../app/firestore/firestoreService";
 
 export default function RegisterForm() {
   const dispatch = useDispatch();
@@ -29,18 +32,18 @@ export default function RegisterForm() {
           email: Yup.string().required().email(),
           password: Yup.string().required(),
         })}
-        onSubmit={async (values, { setSubmitting, setErrors }) => {
-          console.log(values);
-          try {
-            await registerWithFirebase(values);
-            await setUserProfileData(values.firstName, values.lastName);
-            setSubmitting(false);
-            dispatch(closeModal());
-          } catch (error) {
-            setErrors({ auth: error.message });
-            setSubmitting(false);
-          }
-        }}
+        // onSubmit={async (values, { setSubmitting, setErrors }) => {
+        //   console.log(values);
+        //   try {
+        //     await registerWithFirebase(values);
+        //     await updatePerson(values.firstName, values.lastName);
+        //     setSubmitting(false);
+        //     dispatch(closeModal());
+        //   } catch (error) {
+        //     setErrors({ auth: error.message });
+        //     setSubmitting(false);
+        //   }
+        // }}
       >
         {({ isSubmitting, isValid, dirty, errors }) => (
           <Form className='ui form'>

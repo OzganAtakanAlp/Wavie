@@ -5,11 +5,17 @@ import ProjectDetailedChat from "./ProjectDetailedChat";
 import ProjectDetailedHeader from "./ProjectDetailedHeader";
 import ProjectDetailedInfo from "./ProjectDetailedInfo";
 import ProjectDetailedSidebar from "./ProjectDetailedSidebar";
+import LoadingComponent from "../../app/layout/LoadingComponent";
 
 export default function ProjectDetailedPage({ match }) {
   const project = useSelector((state) =>
     state.project.projects.find((e) => e.id === match.params.id)
   );
+  const { loading } = useSelector((state) => state.async);
+  console.log(project);
+
+  if (loading || !project)
+    return <LoadingComponent content='Loading project...' />;
 
   return (
     <Grid>
@@ -18,9 +24,7 @@ export default function ProjectDetailedPage({ match }) {
         <ProjectDetailedInfo project={project} />
         <ProjectDetailedChat project={project} />
       </Grid.Column>
-      <Grid.Column width={6}>
-        <ProjectDetailedSidebar attendees={project.attendees} />
-      </Grid.Column>
+      <Grid.Column width={6}></Grid.Column>
     </Grid>
   );
 }

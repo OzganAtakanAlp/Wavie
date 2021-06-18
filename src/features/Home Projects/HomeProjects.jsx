@@ -15,34 +15,31 @@ import {
 } from "../../app/firestore/firestoreService";
 import { listenToProjects } from "../projectActions";
 
-export default function HomeProjects() {
+export default function HomeProjects({ history }) {
   const { projects } = useSelector((state) => state.project);
   const { loading } = useSelector((state) => state.async);
   const { currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const uid = currentUser.uid;
+
   //console.log(typeof uid);
 
   useEffect(() => {
     dispatch(asyncActionStart());
-    const unsubscribe = getProjectsFromFirestore(
-      {
-        next: (snapshot) => {
-          dispatch(
-            listenToProjects(
-              snapshot.docs.map((docSnapshot) => dataFromSnapshot(docSnapshot))
-            )
-          );
-          dispatch(asyncActionFinish());
-        },
-        error: (error) => dispatch(asyncActionError(error)),
-        complete: () => console.log("you will never see this message"),
+    const unsubscribe = getProjectsFromFirestore({
+      next: (snapshot) => {
+        dispatch(
+          listenToProjects(
+            snapshot.docs.map((docSnapshot) => dataFromSnapshot(docSnapshot))
+          )
+        );
+        dispatch(asyncActionFinish());
       },
-      uid
-    );
+      error: (error) => dispatch(asyncActionError(error)),
+      complete: () => console.log("you will never see this message"),
+    });
 
     return unsubscribe;
-  }, [dispatch, uid]);
+  }, [dispatch]);
 
   return (
     <Grid>

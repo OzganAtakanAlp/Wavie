@@ -5,7 +5,7 @@ import { Button, Container, Menu } from "semantic-ui-react";
 import SignedInMenu from "./SignedInMenu";
 import SignedOutMenu from "./SignedOutMenu";
 
-export default function NavBar() {
+export default function NavBar({ history }) {
   const { authenticated } = useSelector((state) => state.auth);
 
   return (

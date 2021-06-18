@@ -11,8 +11,6 @@ export default function ProjectFilters() {
         <Menu.Item content="I'm going" />
         <Menu.Item content="I'm hosting" />
       </Menu>
-      <Header icon='calendar' attached color='teal' content='Select date' />
-      <Calendar />
     </>
   );
 }

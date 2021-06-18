@@ -11,6 +11,7 @@ import ProjectDetailedPage from "../../features/projectDetailed/ProjectDetailedP
 import Sandbox from "../../features/sandbox/Sandbox";
 import StudioPage from "../../features/Studio/StudioPage";
 import ModalManager from "../common/modals/ModalManager";
+import SignUpPage from "../../features/Greetings Page/SignUpPage";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
               <Route exact path='/sandbox' component={Sandbox} />
               <Route path='/browse' component={BrowseProjects} />
               <Route path='/studio' component={StudioPage} />
+              <Route path='/signUp' component={SignUpPage} />
               <Route
                 exact
                 path='/projects/:id'

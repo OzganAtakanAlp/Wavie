@@ -1,11 +1,11 @@
 import React from "react";
 import CollabProjectsListItem from "./CollabProjectsListItem";
 
-export default function CollabProjectsList({ versions }) {
+export default function CollabProjectsList({ projects }) {
   return (
     <>
-      {versions.map((project) => (
-        <CollabProjectsListItem versions={versions} key={versions.id} />
+      {projects.map((project) => (
+        <CollabProjectsListItem projects={project} key={project.id} />
       ))}
     </>
   );
