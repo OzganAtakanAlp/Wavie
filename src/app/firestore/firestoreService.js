@@ -12,17 +12,11 @@ export function dataFromSnapshot(snapshot) {
   };
 }
 
-export function getProjectsFromFirestore(observer, user) {
+export function listenToProjectsFromFirestore() {
   return db
     .collection("Project")
     .where("__name__", ">", "25")
-    .where("__name__", "<=", "29")
-    .where(
-      "project_settings_static.creator_id",
-      "==",
-      "kBm6zJMHicgj4NA15pUeR903K2u2"
-    )
-    .onSnapshot(observer);
+    .where("__name__", "<=", "29");
 }
 // export function getProjectsFromFirestore(observer, user) {
 //   return db
@@ -59,19 +53,13 @@ export function setUserProfileData(user, firstName, lastName) {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
 }
-export function setUserProfileDataInDocument(user) {
-  var personDocRef = db.collection("Person").doc(user.uid).set(
-    {
-      firstName: user.firstName,
-      lastName: user.lastName,
-    },
-    { merge: true }
-  );
-  return personDocRef;
-}
 
 export function getVersionSettingsFromFirestore(observer) {
   return db.collectionGroup("Versions").onSnapshot(observer);
 }
 
 export function updatePerson() {}
+
+export function listenToProjectFromFirestore(projectId) {
+  return db.collection("Project").doc(projectId);
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Dropdown, Image, Menu } from "semantic-ui-react";
 import { signOutFirebase } from "../../app/firestore/firebaseService";
@@ -29,7 +29,12 @@ export default function SignedInMenu() {
       <Dropdown pointing='top left' text={currentUser.email}>
         <Dropdown.Menu>
           <Dropdown.Item as={Link} to='/home' text='Create Event' icon='plus' />
-          <Dropdown.Item to='/home' text='My profile' icon='user' />
+          <Dropdown.Item
+            as={Link}
+            to={`/profile/:${currentUser.uid}`}
+            text='Profile'
+            icon='user'
+          />
           <Dropdown.Item
             as={Link}
             to='/account'

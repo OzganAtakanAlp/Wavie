@@ -12,6 +12,9 @@ import Sandbox from "../../features/sandbox/Sandbox";
 import StudioPage from "../../features/Studio/StudioPage";
 import ModalManager from "../common/modals/ModalManager";
 import SignUpPage from "../../features/Greetings Page/SignUpPage";
+import ProfilePage from "../../features/Profile Page/ProfilePage";
+import AccountPage from "../../features/auth/AccountPage";
+import ErrorComponent from "../common/errors/ErrorComponent";
 
 export default function App() {
   return (
@@ -30,6 +33,9 @@ export default function App() {
               <Route path='/browse' component={BrowseProjects} />
               <Route path='/studio' component={StudioPage} />
               <Route path='/signUp' component={SignUpPage} />
+              <Route path='/profile/:id' component={ProfilePage} />
+              <Route path='/account' component={AccountPage} />
+              <Route path='/error' component={ErrorComponent} />
               <Route
                 exact
                 path='/projects/:id'

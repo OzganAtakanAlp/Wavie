@@ -1,7 +1,7 @@
 
 
 body {
-  background-color: #dad0d0;
+  background-color: #262525;
 }
 
 .ui.fixed.menu {
@@ -19,6 +19,7 @@ body {
 }
 .masthead h1.ui.header{
   font-size: 4em;
+  
 }
 
 .react-calendar {
@@ -26,3 +27,17 @@ body {
   border: none;
   box-shadow: 0 1px 2px 0 rgba(76, 107, 138, 0.15);
 }
+
+.followButtonProfile {
+  color: #079fe2
+}
+
+.profileHead {
+  display: flex;
+  align-items: center;
+
+  background-image: linear-gradient(135deg, rgb(39, 16, 172) 0%, rgb(179, 41, 133) 69%, rgb(184, 93, 236) 89%) !important;
+  height: 100%;
+}
+
+

@@ -9,13 +9,14 @@ import {
 } from "../../app/async/asyncReducer";
 import {
   dataFromSnapshot,
-  getProjectsFromFirestore,
   getVersionsFromFirestore,
+  listenToProjectsFromFirestore,
 } from "../../app/firestore/firestoreService";
 import { listenToVersions } from "../versionActions";
 import { listenToProjects } from "../projectActions";
 import { Link } from "react-router-dom";
 import ProjectListItemPlaceholder from "../Home Projects/ProjectListItemPlaceholder";
+import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
 
 export default function StudioPage() {
   const { projects } = useSelector((state) => state.project);
@@ -23,25 +24,12 @@ export default function StudioPage() {
   const { currentUser } = useSelector((state) => state.auth);
   const { loading } = useSelector((state) => state.async);
   const dispatch = useDispatch();
-  // const uid = currentUser.uid;
 
-  useEffect(() => {
-    dispatch(asyncActionStart());
-    const unsubscribe = getProjectsFromFirestore({
-      next: (snapshot) => {
-        dispatch(
-          listenToProjects(
-            snapshot.docs.map((docSnapshot) => dataFromSnapshot(docSnapshot))
-          )
-        );
-        dispatch(asyncActionFinish());
-      },
-      error: (error) => dispatch(asyncActionError(error)),
-      complete: () => console.log("you will never see this message"),
-    });
-
-    return unsubscribe;
-  }, [dispatch]);
+  useFirestoreCollection({
+    query: () => listenToProjectsFromFirestore(),
+    data: (projects) => dispatch(listenToProjects(projects)),
+    deps: [dispatch],
+  });
   return (
     <Grid>
       <Grid.Column width={3}>

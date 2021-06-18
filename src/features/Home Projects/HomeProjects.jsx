@@ -1,52 +1,31 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Grid, GridColumn } from "semantic-ui-react";
 import ProjectList from "./ProjectList";
 import { useDispatch, useSelector } from "react-redux";
 import ProjectListItemPlaceholder from "./ProjectListItemPlaceholder";
 import ProjectFilters from "./ProjectFilters";
-import {
-  asyncActionError,
-  asyncActionFinish,
-  asyncActionStart,
-} from "../../app/async/asyncReducer";
-import {
-  dataFromSnapshot,
-  getProjectsFromFirestore,
-} from "../../app/firestore/firestoreService";
+import { listenToProjectsFromFirestore } from "../../app/firestore/firestoreService";
 import { listenToProjects } from "../projectActions";
+import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
 
-export default function HomeProjects({ history }) {
+export default function HomeProjects() {
   const { projects } = useSelector((state) => state.project);
   const { loading } = useSelector((state) => state.async);
-  const { currentUser } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
 
-  //console.log(typeof uid);
-
-  useEffect(() => {
-    dispatch(asyncActionStart());
-    const unsubscribe = getProjectsFromFirestore({
-      next: (snapshot) => {
-        dispatch(
-          listenToProjects(
-            snapshot.docs.map((docSnapshot) => dataFromSnapshot(docSnapshot))
-          )
-        );
-        dispatch(asyncActionFinish());
-      },
-      error: (error) => dispatch(asyncActionError(error)),
-      complete: () => console.log("you will never see this message"),
-    });
-
-    return unsubscribe;
-  }, [dispatch]);
+  useFirestoreCollection({
+    query: () => listenToProjectsFromFirestore(),
+    data: (projects) => dispatch(listenToProjects(projects)),
+    deps: [dispatch],
+  });
 
   return (
     <Grid>
-      <GridColumn width={4}>
+      <GridColumn width={5}>
         <ProjectFilters />
       </GridColumn>
-      <GridColumn width={12}>
+      <GridColumn width={7}>
         {loading && (
           <>
             <ProjectListItemPlaceholder />

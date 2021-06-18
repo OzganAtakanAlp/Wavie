@@ -8,6 +8,7 @@ import {
   dataFromSnapshot,
   getProjectsFromFirestore,
   getVersionsFromFirestore,
+  listenToProjectsFromFirestore,
 } from "../../app/firestore/firestoreService";
 import { listenToProjects } from "../projectActions";
 import { listenToVersions } from "../versionActions";
@@ -16,35 +17,21 @@ import {
   asyncActionFinish,
   asyncActionStart,
 } from "../../app/async/asyncReducer";
+import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
 
 export default function BrowseProjects() {
   const { projects } = useSelector((state) => state.project);
   const { loading } = useSelector((state) => state.async);
   const { versions } = useSelector((state) => state.versions);
   const { currentUser } = useSelector((state) => state.auth);
-  const uid = currentUser.uid;
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(asyncActionStart());
-    const unsubscribe = getProjectsFromFirestore(
-      {
-        next: (snapshot) => {
-          dispatch(
-            listenToProjects(
-              snapshot.docs.map((docSnapshot) => dataFromSnapshot(docSnapshot))
-            )
-          );
-          dispatch(asyncActionFinish());
-        },
-        error: (error) => dispatch(asyncActionError(error)),
-        complete: () => console.log("you will never see this message"),
-      },
-      uid
-    );
-
-    return unsubscribe;
-  }, [dispatch, uid]);
+  useFirestoreCollection({
+    query: () => listenToProjectsFromFirestore(),
+    data: (projects) => dispatch(listenToProjects(projects)),
+    deps: [dispatch],
+  });
 
   return (
     <Grid>
