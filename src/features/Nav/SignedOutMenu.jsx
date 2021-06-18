@@ -1,10 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Button, Menu } from "semantic-ui-react";
-import { openModal } from "../../app/common/modals/modalReducer";
 
-export default function SignedOutMenu({ setAuthenticated, history }) {
+export default function SignedOutMenu({ setAuthenticated }) {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   function redirectToLogin() {
     history.push("/");

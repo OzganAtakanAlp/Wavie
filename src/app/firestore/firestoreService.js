@@ -43,12 +43,22 @@ export function getVersionsFromFirestore(observer) {
   return versions;
 }
 
-// export function setUserProfileData(user) {
-//   return db.collection("Person").doc(user.uid).set({
-//     displayName: user.displayName,
-//     email: user.email,
-//   });
-// }
+export function setUserProfileData(user, firstName, lastName) {
+  return db
+    .collection("Person")
+    .doc(user.uid)
+    .set({
+      display_name: user.displayName,
+      email: user.email, //might get deleted, dunno
+      name: firstName,
+      surname: lastName,
+      user_friends_id: [""],
+      user_groups_id: [""],
+      user_id: user.uid,
+      user_project_id: [""],
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+}
 export function setUserProfileDataInDocument(user) {
   var personDocRef = db.collection("Person").doc(user.uid).set(
     {
