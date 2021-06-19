@@ -8,6 +8,8 @@ import ProjectInfo from "./ProjectInfo";
 export default function ProjectListItem({ project, versions }) {
   const dispatch = useDispatch();
 
+  console.log(project);
+
   return (
     <>
       <Item.Group>

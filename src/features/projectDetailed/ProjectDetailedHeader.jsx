@@ -16,11 +16,13 @@ const eventImageTextStyle = {
 };
 
 export default function ProjectDetailedHeader({ project }) {
+  const settings = project.project_settings_static;
+
   return (
     <Segment.Group>
       <Segment basic attached='top' style={{ padding: "0" }}>
         <Image
-          src={`/assets/categoryImages/${project.category}.jpg`}
+          src={`/assets/categoryImages/music.jpg`}
           fluid
           style={eventImageStyle}
         />
@@ -31,12 +33,12 @@ export default function ProjectDetailedHeader({ project }) {
               <Item.Content>
                 <Header
                   size='huge'
-                  content={project.title}
+                  content={settings.project_name}
                   style={{ color: "white" }}
                 />
-                <p>{project.date}</p>
+                <p>{settings.date_created}</p>
                 <p>
-                  Hosted by <strong>{project.hostedBy}</strong>
+                  Brainchild of: <strong>{settings.creator_id}</strong>
                 </p>
               </Item.Content>
             </Item>
@@ -50,7 +52,7 @@ export default function ProjectDetailedHeader({ project }) {
 
         <Button
           as={Link}
-          to={`/manage/${project.id}}`}
+          to={`/studioDetailed/${project.id}}`}
           color='orange'
           floated='right'
         >

@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   modals: modalReducer,
   auth: authReducer,
   async: asyncReducer,
-  versions: versionReducer,
+  version: versionReducer,
 });
 
 export default rootReducer;

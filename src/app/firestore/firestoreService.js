@@ -18,6 +18,14 @@ export function listenToProjectsFromFirestore() {
     .where("__name__", ">", "25")
     .where("__name__", "<=", "29");
 }
+export function listentoVersionsFromFirestore(projectId) {
+  console.log(projectId);
+  return db
+    .collection("Project")
+    .doc(projectId)
+    .collection("Versions")
+    .orderBy("date_created", "desc");
+}
 // export function getProjectsFromFirestore(observer, user) {
 //   return db
 //     .collection("Project")
@@ -52,10 +60,6 @@ export function setUserProfileData(user, firstName, lastName) {
       user_project_id: [""],
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
-}
-
-export function getVersionSettingsFromFirestore(observer) {
-  return db.collectionGroup("Versions").onSnapshot(observer);
 }
 
 export function updatePerson() {}

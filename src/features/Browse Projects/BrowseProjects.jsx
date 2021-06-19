@@ -22,7 +22,7 @@ import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
 export default function BrowseProjects() {
   const { projects } = useSelector((state) => state.project);
   const { loading } = useSelector((state) => state.async);
-  const { versions } = useSelector((state) => state.versions);
+
   const { currentUser } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ export default function BrowseProjects() {
             <ProjectListItemPlaceholder />
           </>
         )}
-        <ProjectList projects={projects} versions={versions} />
+        <ProjectList projects={projects} />
       </GridColumn>
     </Grid>
   );

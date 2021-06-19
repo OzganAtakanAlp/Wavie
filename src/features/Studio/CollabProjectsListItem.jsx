@@ -1,13 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Item } from "semantic-ui-react";
 
 export default function CollabProjectsListItem({ projects }) {
   const project = projects.project_settings_static;
-  console.log(project);
+
   return (
     <>
-      <Item.Group as={Link} to={`/projectDetailed/:${project.id}`}>
+      <Item.Group as={NavLink} to={`/studioDetailed/${projects.id}`}>
         <Item>
           <Item.Image size='tiny' />
           <Item.Content>

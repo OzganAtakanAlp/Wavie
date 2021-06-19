@@ -16,7 +16,7 @@ export default function ProjectDetailedPage({ match }) {
     state.project.projects.find((e) => e.id === match.params.id)
   );
   const { loading, error } = useSelector((state) => state.async);
-
+  console.log(project);
   const dispatch = useDispatch();
 
   useFirestoreDoc({
@@ -24,7 +24,7 @@ export default function ProjectDetailedPage({ match }) {
     data: (project) => dispatch(listenToProjects([project])),
     deps: [match.params.id, dispatch],
   });
-
+  console.log(project);
   if (loading || (!project && !error))
     return <LoadingComponent content='Loading project...' />;
 

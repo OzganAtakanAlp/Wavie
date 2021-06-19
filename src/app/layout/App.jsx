@@ -15,6 +15,7 @@ import SignUpPage from "../../features/Greetings Page/SignUpPage";
 import ProfilePage from "../../features/Profile Page/ProfilePage";
 import AccountPage from "../../features/auth/AccountPage";
 import ErrorComponent from "../common/errors/ErrorComponent";
+import StudioDetailedPage from "../../features/Studio/Studio Detailed/StudioDetailedPage";
 
 export default function App() {
   return (
@@ -40,6 +41,11 @@ export default function App() {
                 exact
                 path='/projects/:id'
                 component={ProjectDetailedPage}
+              />
+              <Route
+                exact
+                path='/studioDetailed/:id'
+                component={StudioDetailedPage}
               />
             </Container>
           </>
