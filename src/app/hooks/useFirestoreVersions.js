@@ -11,7 +11,6 @@ export default function useFirestoreVersions({ query, data, deps }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(query);
     dispatch(asyncActionStart());
     const unsubscribe = query().onSnapshot(
       (snapshot) => {

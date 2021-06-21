@@ -16,6 +16,8 @@ import ProfilePage from "../../features/Profile Page/ProfilePage";
 import AccountPage from "../../features/auth/AccountPage";
 import ErrorComponent from "../common/errors/ErrorComponent";
 import StudioDetailedPage from "../../features/Studio/Studio Detailed/StudioDetailedPage";
+import VersionsPlayInfo from "../../features/Studio/Studio Detailed/Version Detailed/VersionPlayInfo";
+import { StudioDetailedLayout } from "./StudioDetailedLayout";
 
 export default function App() {
   return (
@@ -42,10 +44,16 @@ export default function App() {
                 path='/projects/:id'
                 component={ProjectDetailedPage}
               />
+
               <Route
                 exact
                 path='/studioDetailed/:id'
-                component={StudioDetailedPage}
+                component={StudioDetailedLayout}
+              />
+              <Route
+                exact
+                path='/versionsPlayInfo/:id'
+                component={VersionsPlayInfo}
               />
             </Container>
           </>
