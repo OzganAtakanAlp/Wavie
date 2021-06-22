@@ -1,4 +1,9 @@
-import { DOWNLOAD_AUDIO, PAUSE_AUDIO, PLAY_AUDIO } from "./audioConstants";
+import {
+  DOWNLOAD_AUDIO,
+  GET_AUDIO_REF,
+  PAUSE_AUDIO,
+  PLAY_AUDIO,
+} from "./audioConstants";
 
 export function downloadAudio(audio) {
   return {
@@ -6,16 +11,20 @@ export function downloadAudio(audio) {
     payload: audio,
   };
 }
-export function pauseAudio(isPlaying) {
+export function pauseAudio() {
   return {
     type: PAUSE_AUDIO,
-    payload: isPlaying,
   };
 }
 
-export function playAudio(isPlaying) {
+export function playAudio() {
   return {
     type: PLAY_AUDIO,
-    payload: isPlaying,
+  };
+}
+export function getAudioRef(audioRef) {
+  return {
+    type: GET_AUDIO_REF,
+    payload: audioRef,
   };
 }

@@ -1,16 +1,37 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Button } from "semantic-ui-react";
+import { Button, Grid, Segment } from "semantic-ui-react";
+import useStorage from "../../../../app/hooks/useStorage";
+import {
+  dataFromURL,
+  getAudioFromStorage,
+} from "../../../../app/storage/storageService";
+import {
+  downloadAudio,
+  getAudioRef,
+  pauseAudio,
+  playAudio,
+} from "../../../audioActions";
 
-export default function VersionPlayInfo({ match }) {
+export default function VersionPlayInfo({ versions }) {
+  const [fileUrl, setFileUrl] = React.useState(null);
+  const versionId = useSelector((state) => state.selectedVersion.selectedId);
+  const { isPlaying } = useSelector((state) => state.music);
+  const dispatch = useDispatch();
+  console.log(versionId);
+
+  const audioRef = useSelector(
+    (state) => state.version.versions[0].bounce_path_to_cloud
+  );
+  console.log(audioRef);
   const audioElement = new Audio(
     "/assets/giorno's theme but only the best part is in.wav"
   );
-  const version = useSelector((state) =>
-    state.version.versions.find((e) => e.id === match.params.id)
-  );
-  console.log(audioElement);
+
+  const audioUrl = versions[versionId - 1].audioUrl;
+  console.log(audioUrl);
 
   function handlePlay() {
     audioElement.play();
@@ -18,14 +39,24 @@ export default function VersionPlayInfo({ match }) {
   function handlePause() {
     audioElement.pause();
   }
+  function handleRelease() {}
 
   return (
     <>
-      <div>
-        <audio src={audioElement} />
-        <Button icon='play' onClick={handlePlay} />
-        <Button icon='pause' onClick={handlePause} />
-      </div>
+      <Grid>
+        <Grid.Column width={10}>
+          <Segment.Group className='ui audio player '>
+            {audioUrl && <audio src={audioUrl} preload='auto' controls />}
+
+            <Button icon='play' onClick={handlePlay} />
+
+            <Button icon='pause' onClick={handlePause} />
+          </Segment.Group>
+        </Grid.Column>
+        <Grid.Column width={6}>
+          <Button content='Make a release' />
+        </Grid.Column>
+      </Grid>
     </>
   );
 }

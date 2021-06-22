@@ -23,7 +23,7 @@ export default function StudioDetailedPage({ match }) {
 
   const { loading, error } = useSelector((state) => state.async);
   const { versions } = useSelector((state) => state.version);
-  const audio = useSelector((state) => state.audios);
+
   const dispatch = useDispatch();
 
   useFirestoreVersions({
@@ -51,7 +51,14 @@ export default function StudioDetailedPage({ match }) {
       </Grid.Column>
       <Grid.Column width={10}></Grid.Column>
       <Grid.Column width={2}>
-        <Button content='Make a Release' />
+        <Button
+          content='Make a Release'
+          onClick={() =>
+            dispatch(
+              openModal({ modalType: "ReleaseForm", modalProps: { id } })
+            )
+          }
+        />
       </Grid.Column>
     </Grid>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { Grid } from "semantic-ui-react";
+import { Grid, Header } from "semantic-ui-react";
 import Sidebar from "../../features/Studio/Studio Detailed/Sidebar";
 import VersionPlayInfo from "../../features/Studio/Studio Detailed/Version Detailed/VersionPlayInfo";
 import { listenToVersions } from "../../features/versionActions";
@@ -18,6 +18,7 @@ export function StudioDetailedLayout({ match }) {
   const { loading, error } = useSelector((state) => state.async);
   const { versions } = useSelector((state) => state.version);
   const audio = useSelector((state) => state.audios);
+  const { selectedId } = useSelector((state) => state.selectedVersion);
   const dispatch = useDispatch();
 
   useFirestoreVersions({
@@ -38,7 +39,11 @@ export function StudioDetailedLayout({ match }) {
           <Sidebar versions={versions} />
         </Grid.Column>
         <Grid.Column width={10}>
-          <VersionPlayInfo />
+          {selectedId != null ? (
+            <VersionPlayInfo versions={versions} />
+          ) : (
+            <Header content='select a version to view the audio' />
+          )}
         </Grid.Column>
       </Grid>
 

@@ -16,7 +16,7 @@ export function listenToProjectsFromFirestore() {
   return db
     .collection("Project")
     .where("__name__", ">", "25")
-    .where("__name__", "<=", "29");
+    .where("__name__", "<=", "31");
 }
 export function listentoVersionsFromFirestore(projectId) {
   console.log(projectId);
@@ -62,8 +62,24 @@ export function setUserProfileData(user, firstName, lastName) {
     });
 }
 
-export function updatePerson() {}
-
 export function listenToProjectFromFirestore(projectId) {
   return db.collection("Project").doc(projectId);
+}
+
+export function createRelease(
+  url,
+  project_name,
+
+  bpm,
+  key,
+  style
+) {
+  return db.collection("Releases").add({
+    audioUrl: url,
+    project_name: project_name,
+    date_released: firebase.firestore.FieldValue.serverTimestamp(),
+    bpm: bpm,
+    key: key,
+    style: style,
+  });
 }

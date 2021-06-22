@@ -6,6 +6,7 @@ import authReducer from "../../features/auth/authReducer";
 import asyncReducer from "../async/asyncReducer";
 import versionReducer from "../../features/versionReducer";
 import audioReducer from "../../features/audioReducer";
+import sidebarReducer from "../../features/sidebarReducer";
 
 const rootReducer = combineReducers({
   test: testReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   async: asyncReducer,
   version: versionReducer,
   music: audioReducer,
+  selectedVersion: sidebarReducer,
 });
 
 export default rootReducer;
