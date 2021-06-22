@@ -51,14 +51,7 @@ export default function StudioDetailedPage({ match }) {
       </Grid.Column>
       <Grid.Column width={10}></Grid.Column>
       <Grid.Column width={2}>
-        <Button
-          content='Make a Release'
-          onClick={() =>
-            dispatch(
-              openModal({ modalType: "ReleaseForm", modalProps: { id } })
-            )
-          }
-        />
+        <Button content='Make a Release THIS IS A SHAM' />
       </Grid.Column>
     </Grid>
   );

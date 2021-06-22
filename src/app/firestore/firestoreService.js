@@ -66,20 +66,13 @@ export function listenToProjectFromFirestore(projectId) {
   return db.collection("Project").doc(projectId);
 }
 
-export function createRelease(
-  url,
-  project_name,
-
-  bpm,
-  key,
-  style
-) {
+export function createRelease(versions, project_name) {
   return db.collection("Releases").add({
-    audioUrl: url,
-    project_name: project_name,
+    audioUrl: versions.audioUrl,
+    project_name: project_name.project_name,
     date_released: firebase.firestore.FieldValue.serverTimestamp(),
-    bpm: bpm,
-    key: key,
-    style: style,
+    bpm: versions.project_bpm,
+    key: versions.project_key,
+    style: versions.project_style,
   });
 }
