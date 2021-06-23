@@ -4,7 +4,10 @@ import MyTextInput from "../../../app/common/form/MyTextInput";
 import { Formik, Form } from "formik";
 
 import * as Yup from "yup";
-import { createRelease } from "../../../app/firestore/firestoreService";
+import {
+  addReleaseId,
+  createRelease,
+} from "../../../app/firestore/firestoreService";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../../app/common/modals/modalReducer";
 import { Button, Label } from "semantic-ui-react";
@@ -22,9 +25,17 @@ export default function ReleaseForm({ versions }) {
         })}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
           try {
-            await createRelease(
+            var releaseRef = await createRelease(
               versions[Math.abs(selectedId - versions.length)],
               values
+            );
+            console.log(
+              releaseRef.id,
+              versions[Math.abs(selectedId - versions.length)]
+            );
+            await addReleaseId(
+              releaseRef.id,
+              versions[Math.abs(selectedId - versions.length)]
             );
             setSubmitting(false);
             dispatch(closeModal());

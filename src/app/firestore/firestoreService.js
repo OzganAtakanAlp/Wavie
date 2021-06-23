@@ -44,7 +44,22 @@ export function getVersionsFromFirestore(observer) {
 
   return versions;
 }
-
+export function updateUserProfileDataForReleases(creatorId, releaseId) {
+  return db
+    .collection("Person")
+    .doc(creatorId)
+    .set({
+      user_releases_id: [...releaseId],
+    });
+}
+export function addReleaseId(release, version) {
+  return db.collection("Person").doc(version.creator_id).set(
+    {
+      user_releases_id: release,
+    },
+    { merge: true }
+  );
+}
 export function setUserProfileData(user, firstName, lastName) {
   return db
     .collection("Person")
@@ -58,6 +73,7 @@ export function setUserProfileData(user, firstName, lastName) {
       user_groups_id: [""],
       user_id: user.uid,
       user_project_id: [""],
+      user_releases_id: [""],
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
 }
@@ -67,7 +83,11 @@ export function listenToProjectFromFirestore(projectId) {
 }
 
 export function createRelease(versions, project_name) {
-  return db.collection("Releases").add({
+  var newDocRef = db.collection("Releases").doc();
+
+  newDocRef.set({
+    release_id: newDocRef.id,
+    creator_id: versions.creator_id,
     audioUrl: versions.audioUrl,
     project_name: project_name.project_name,
     date_released: firebase.firestore.FieldValue.serverTimestamp(),
@@ -75,4 +95,5 @@ export function createRelease(versions, project_name) {
     key: versions.project_key,
     style: versions.project_style,
   });
+  return newDocRef;
 }
