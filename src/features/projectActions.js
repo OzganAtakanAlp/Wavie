@@ -9,6 +9,7 @@ import {
   UPDATE_PROJECT,
   DELETE_PROJECT,
   FETCH_PROJECTS,
+  LISTEN_TO_PROJECT_CHAT,
 } from "./projectConstants";
 
 export function loadProjects() {
@@ -47,5 +48,12 @@ export function deleteProject(projectId) {
   return {
     type: DELETE_PROJECT,
     payload: projectId,
+  };
+}
+
+export function listenToProjectChat(comments) {
+  return {
+    type: LISTEN_TO_PROJECT_CHAT,
+    payload: comments,
   };
 }

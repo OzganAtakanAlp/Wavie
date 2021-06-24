@@ -11,12 +11,19 @@ export function dataFromSnapshot(snapshot) {
     id: snapshot.id,
   };
 }
+export function getUser(user) {
+  return db.collection("Person").doc(user.uid);
+}
+
+export function listenToReleasesFromFirestore(user) {
+  return db.collection("Releases").where("creator_id", "==", user.uid);
+}
 
 export function listenToProjectsFromFirestore() {
   return db
     .collection("Project")
     .where("__name__", ">", "25")
-    .where("__name__", "<=", "31");
+    .where("__name__", "<=", "41");
 }
 export function listentoVersionsFromFirestore(projectId) {
   console.log(projectId);
@@ -48,17 +55,23 @@ export function updateUserProfileDataForReleases(creatorId, releaseId) {
   return db
     .collection("Person")
     .doc(creatorId)
-    .set({
-      user_releases_id: [...releaseId],
-    });
+    .set(
+      {
+        user_releases_id: [...releaseId],
+      },
+      { merge: true }
+    );
 }
-export function addReleaseId(release, version) {
-  return db.collection("Person").doc(version.creator_id).set(
-    {
-      user_releases_id: release,
-    },
-    { merge: true }
-  );
+export function addReleaseId(releaseId, version) {
+  return db
+    .collection("Person")
+    .doc(version.creator_id)
+    .update(
+      {
+        user_releases_id: firebase.firestore.FieldValue.arrayUnion(releaseId),
+      },
+      { merge: true }
+    );
 }
 export function setUserProfileData(user, firstName, lastName) {
   return db

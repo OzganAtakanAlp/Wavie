@@ -25,6 +25,8 @@ import { listenToProjects } from "../projectActions";
 import ProjectListItemPlaceholder from "../Home Projects/ProjectListItemPlaceholder";
 import ProfileProjectList from "./ProfileProjectList";
 import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
+import ProfileStats from "./ProfileStats";
+import ProfileHeader from "./ProfileHeader";
 
 export default function ProfilePage() {
   const { loading } = useSelector((state) => state.async);
@@ -33,23 +35,20 @@ export default function ProfilePage() {
   const dispatch = useDispatch();
 
   useFirestoreCollection({
-    query: () => listenToProjectsFromFirestore(),
+    query: () => listenToProjectsFromFirestore(currentUser),
     data: (projects) => dispatch(listenToProjects(projects)),
-    deps: [dispatch],
+    deps: [dispatch, currentUser],
   });
 
   return (
     <>
       <Container fluid className='profileHead'>
         <Grid>
-          <Grid.Column width={3}>
-            <Image src='/assets/wavie.svg' />
-            <Segment>
-              <h3>Plays: ... </h3>
-              <h3>Likes: ...</h3>
-              <h3>Followers: ... </h3>
-              <h3>following: ...</h3>
-            </Segment>
+          <Grid.Row>
+            <ProfileHeader />
+          </Grid.Row>
+          <Grid.Column width={4}>
+            <ProfileStats />
           </Grid.Column>
           <Grid.Column width={10}>
             {loading && (
@@ -58,13 +57,13 @@ export default function ProfilePage() {
                 <ProjectListItemPlaceholder />
               </>
             )}
-            {projects == null ? (
+            {projects != null ? (
               <ProfileProjectList projects={projects} />
             ) : (
               <h1>You don't seem to have created any projects yet.</h1>
             )}
           </Grid.Column>
-          <Grid.Column width={3}>
+          <Grid.Column width={2}>
             <Button className='followButtonProfile' content='Follow' />
             <br />
             <Button className='DMButtonProfile' content='DM' />

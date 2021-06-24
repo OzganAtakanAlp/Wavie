@@ -1,4 +1,4 @@
-import { SIGN_IN_USER, SIGN_OUT_USER } from "./authConstants";
+import { FETCH_FRIENDS, SIGN_IN_USER, SIGN_OUT_USER } from "./authConstants";
 
 const initialState = {
   authenticated: false,
@@ -25,6 +25,11 @@ export default function authReducer(state = initialState, { type, payload }) {
         authenticated: false,
         currentUser: null,
         uid: null,
+      };
+    case FETCH_FRIENDS:
+      return {
+        ...state,
+        user_friends_id: payload,
       };
     default:
       return state;

@@ -1,14 +1,18 @@
 import { Form, Formik, yupToFormErrors } from "formik";
 import React from "react";
+import { useSelector } from "react-redux";
 import { Button, Header, Label, Segment } from "semantic-ui-react";
 import * as Yup from "yup";
 import MyTextInput from "../../app/common/form/MyTextInput";
+import { updateUserPassword } from "../../app/firestore/firebaseService";
 
 export default function AccountPage() {
+  const { currentUser } = useSelector((state) => state.auth);
   return (
     <Segment>
       <Header dividing size='large' content='Account' />
-      <div>
+
+      <>
         <Header color='teal' sub content='Change Password' />
         <p>Use this for to change your password</p>
         <div>
@@ -21,8 +25,14 @@ export default function AccountPage() {
                 "Passwords do not match"
               ),
             })}
-            onSubmit={(values) => {
-              console.log(values);
+            onSubmit={async (values, { setSubmitting, setErrors }) => {
+              try {
+                await updateUserPassword(values);
+              } catch (error) {
+                setErrors({ auth: error.message });
+              } finally {
+                setSubmitting(false);
+              }
             }}
           >
             {({ errors, isSubmitting, isValid, dirty }) => (
@@ -33,7 +43,7 @@ export default function AccountPage() {
                   placeholder='New Password'
                 />
                 <MyTextInput
-                  name='newPassword1'
+                  name='newPassword2'
                   type='password'
                   placeholder='Confirm password'
                 />
@@ -46,8 +56,10 @@ export default function AccountPage() {
                   />
                 )}
                 <Button
+                  style={{ display: "block" }}
                   type='submit'
                   disabled={!isValid || isSubmitting || !dirty}
+                  loading={isSubmitting}
                   size='large'
                   positive
                   content='Update password'
@@ -56,7 +68,7 @@ export default function AccountPage() {
             )}
           </Formik>
         </div>
-      </div>
+      </>
     </Segment>
   );
 }

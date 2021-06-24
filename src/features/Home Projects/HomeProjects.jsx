@@ -11,7 +11,7 @@ import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
 export default function HomeProjects() {
   const { projects } = useSelector((state) => state.project);
   const { loading } = useSelector((state) => state.async);
-
+  const { currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useFirestoreCollection({

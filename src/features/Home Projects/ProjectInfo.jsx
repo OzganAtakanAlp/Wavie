@@ -14,7 +14,8 @@ import {
 import { listenToVersions } from "../versionActions";
 
 export default function ProjectInfo({ versions }) {
-  // const dispatch = useDispatch();
+  const versionId = useSelector((state) => state.selectedVersion.selectedId);
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   dispatch(asyncActionStart());
   //   const unsubscribe = getProjectInfo({
@@ -33,15 +34,19 @@ export default function ProjectInfo({ versions }) {
   //   return unsubscribe;
   // }, [dispatch]);
 
-  // console.log(versions);
+  console.log(versions);
 
   return (
-    <List.Item>
-      <Label>{versions}</Label>
-      <Label>KEY</Label>
-      <Label>GENRE</Label>
-      <Label>GENRE</Label>
-      <Label>GENRE</Label>
-    </List.Item>
+    <List>
+      <Label>
+        {versions[Math.abs(versionId - versions.length)].project_style}
+      </Label>
+      <Label>
+        {versions[Math.abs(versionId - versions.length)].project_bpm}
+      </Label>
+      <Label>
+        {versions[Math.abs(versionId - versions.length)].project_key}
+      </Label>
+    </List>
   );
 }

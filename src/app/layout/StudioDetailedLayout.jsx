@@ -42,12 +42,10 @@ export function StudioDetailedLayout({ match }) {
           {selectedId != null ? (
             <VersionPlayInfo versions={versions} />
           ) : (
-            <Header content='select a version to view the audio' />
+            <Header content='select a version to view the audio and make a release' />
           )}
         </Grid.Column>
       </Grid>
-
-      <h1>dsadsa</h1>
     </>
   );
 }

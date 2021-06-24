@@ -8,8 +8,6 @@ import ProjectInfo from "./ProjectInfo";
 export default function ProjectListItem({ project, versions }) {
   const dispatch = useDispatch();
 
-  console.log(project);
-
   return (
     <>
       <Item.Group>
@@ -35,9 +33,7 @@ export default function ProjectListItem({ project, versions }) {
             </span>
           </Segment>
           <Segment secondary>
-            <List horizontal>
-              <ProjectInfo versions={versions} />
-            </List>
+            <List horizontal>{/* <ProjectInfo versions={versions} /> */}</List>
           </Segment>
           <Segment clearing>
             <div>{project.description}</div>

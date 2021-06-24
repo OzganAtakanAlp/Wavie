@@ -12,6 +12,8 @@ const firebaseConfig = {
   messagingSenderId: "911156347606",
   appId: "1:911156347606:web:d3384a80a2bdc2a0f4bf77",
   measurementId: "G-R5ZLHP8ST9",
+  databaseURL:
+    "https://capstone-e02e7-default-rtdb.europe-west1.firebasedatabase.app",
 };
 
 firebase.initializeApp(firebaseConfig);

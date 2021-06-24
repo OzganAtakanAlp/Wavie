@@ -3,14 +3,10 @@ import { Grid, Menu, Segment } from "semantic-ui-react";
 import CollabProjectsList from "./CollabProjectsList";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  dataFromSnapshot,
-  getVersionsFromFirestore,
-  listenToProjectsFromFirestore,
-} from "../../app/firestore/firestoreService";
+import { listenToProjectsFromFirestore } from "../../app/firestore/firestoreService";
 
 import { listenToProjects } from "../projectActions";
-import { Link } from "react-router-dom";
+
 import ProjectListItemPlaceholder from "../Home Projects/ProjectListItemPlaceholder";
 import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
 
@@ -22,9 +18,9 @@ export default function StudioPage() {
   const dispatch = useDispatch();
 
   useFirestoreCollection({
-    query: () => listenToProjectsFromFirestore(),
+    query: () => listenToProjectsFromFirestore(currentUser),
     data: (projects) => dispatch(listenToProjects(projects)),
-    deps: [dispatch],
+    deps: [dispatch, currentUser],
   });
   return (
     <Grid>

@@ -33,9 +33,7 @@ export default function ProfileProjects({ project, versions }) {
             </span>
           </Segment>
           <Segment secondary>
-            <List horizontal>
-              <ProjectInfo versions={versions} />
-            </List>
+            <List horizontal>{/* <ProjectInfo versions={versions} /> */}</List>
           </Segment>
           <Segment clearing>
             <div>{project.description}</div>

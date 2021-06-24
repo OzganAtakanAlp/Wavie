@@ -18,8 +18,14 @@ import ErrorComponent from "../common/errors/ErrorComponent";
 import StudioDetailedPage from "../../features/Studio/Studio Detailed/StudioDetailedPage";
 import VersionsPlayInfo from "../../features/Studio/Studio Detailed/Version Detailed/VersionPlayInfo";
 import { StudioDetailedLayout } from "./StudioDetailedLayout";
+import { useSelector } from "react-redux";
+import LoadingComponent from "./LoadingComponent";
 
 export default function App() {
+  const { initialized } = useSelector((state) => state.async);
+
+  if (!initialized) return <LoadingComponent content='Loading app...' />;
+
   return (
     <>
       <ModalManager />

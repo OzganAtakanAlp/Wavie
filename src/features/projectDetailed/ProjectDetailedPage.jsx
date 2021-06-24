@@ -24,7 +24,7 @@ export default function ProjectDetailedPage({ match }) {
     data: (project) => dispatch(listenToProjects([project])),
     deps: [match.params.id, dispatch],
   });
-  console.log(project);
+
   if (loading || (!project && !error))
     return <LoadingComponent content='Loading project...' />;
 
@@ -35,7 +35,10 @@ export default function ProjectDetailedPage({ match }) {
       <Grid.Column width={10}>
         <ProjectDetailedHeader project={project} />
         <ProjectDetailedInfo project={project} />
-        <ProjectDetailedChat project={project} />
+        <ProjectDetailedChat
+          projectId={project.id}
+          onClick={console.log(project.id)}
+        />
       </Grid.Column>
       <Grid.Column width={6}></Grid.Column>
     </Grid>
