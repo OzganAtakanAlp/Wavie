@@ -25,13 +25,13 @@ export default function StudioPage() {
   return (
     <Grid>
       <Grid.Column width={3}>
-        <Menu pointing secondary vertical>
+        <Menu pointing secondary vertical inverted>
           <Menu.Item>
             <Menu.Header>Projects</Menu.Header>
 
             <Menu.Menu>
-              <Menu.Item name='All' active={true} />
-              <Menu.Item name='Solo' />
+              <Menu.Item inverted name='All' active={true} />
+              <Menu.Item inverted name='Solo' />
               <Menu.Item name='Group' />
             </Menu.Menu>
           </Menu.Item>

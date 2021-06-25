@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Grid, Header, Item, Segment } from "semantic-ui-react";
 
-export default function ProfileHeader() {
+export default function ProfileHeader({ profile }) {
   return (
     <Segment>
       <Grid.Column width={12}>
@@ -13,7 +13,7 @@ export default function ProfileHeader() {
               <Header
                 as='h1'
                 style={{ display: "block", marginBottom: 10 }}
-                content='Display name'
+                content={profile.display_name}
               />
             </Item.Content>
           </Item>

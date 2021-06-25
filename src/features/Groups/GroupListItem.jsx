@@ -15,22 +15,22 @@ import {
   incrementShares,
 } from "../releaseActions";
 
-export default function ProjectListItem({ release }) {
+export default function GroupListItem({ groups }) {
   const dispatch = useDispatch();
   const [itemLiked, setItemLiked] = useState(false);
   const [itemShared, setItemShared] = useState(false);
 
-  function handleOnLikeClick() {
-    if (itemLiked) {
-      decrementLikeCount();
-      dispatch(decrementLikes(release.like_count));
-      setItemLiked(false);
-    } else {
-      incrementLikeCount(release.id);
-      dispatch(incrementLikes(release.like_count));
-      setItemLiked(true);
-    }
-  }
+  //   function handleOnLikeClick() {
+  //     if (itemLiked) {
+  //       decrementLikeCount();
+  //       dispatch(decrementLikes(release.like_count));
+  //       setItemLiked(false);
+  //     } else {
+  //       incrementLikeCount(release.id);
+  //       dispatch(incrementLikes(release.like_count));
+  //       setItemLiked(true);
+  //     }
+  //   }
   // function handleOnShareClick() {
   //   incrementShareCount(release.id);
   //   itemShared
@@ -44,11 +44,11 @@ export default function ProjectListItem({ release }) {
       <Item.Group>
         <Segment.Group>
           <Segment>
-            <Item.Group link as={NavLink} to={`/projects/${release.id}`}>
+            <Item.Group link as={NavLink} to={`/projects/${groups.group_id}`}>
               <Item>
-                <Item.Image size='tiny' circular src={release.hostPhotoURL} />
+                <Item.Image size='tiny' circular src='assets/user.png' />
                 <Item.Content inverted>
-                  <Item.Header content={release.project_name} />
+                  <Item.Header content={groups.group_name} />
                 </Item.Content>
               </Item>
             </Item.Group>
@@ -59,39 +59,11 @@ export default function ProjectListItem({ release }) {
             </span>
           </Segment>
           <Segment secondary>
-            {release.audioUrl && (
+            {/* {release.audioUrl && (
               <audio src={release.audioUrl} preload='auto' controls />
-            )}
+            )} */}
           </Segment>
           <Segment clearing>
-            <Button
-              onClick={handleOnLikeClick}
-              size='medium'
-              as='div'
-              labelPosition='right'
-              floated='right'
-            >
-              <Button color='black' icon>
-                <Icon size='large' name='star' />
-                <Label as='a' basic>
-                  {release.like_count ? release.like_count : 0}
-                </Label>
-              </Button>
-            </Button>
-            <Button
-              size='medium'
-              as='div'
-              labelPosition='right'
-              floated='right'
-            >
-              <Button color='black' icon>
-                <Icon size='large' name='share' />
-                <Label as='a' basic>
-                  1234
-                  {/* {release.like_count} */}
-                </Label>
-              </Button>
-            </Button>
             {/* <Button icon='share' floated='right'></Button> */}
 
             {/* <Button icon='star' color='black' floated='right'></Button> */}

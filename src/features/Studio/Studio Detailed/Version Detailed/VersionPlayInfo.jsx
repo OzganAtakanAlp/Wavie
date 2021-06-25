@@ -1,20 +1,10 @@
 import React from "react";
-import { useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 
-import { Button, Divider, Grid, Label, Segment } from "semantic-ui-react";
+import { Button, Grid, Segment } from "semantic-ui-react";
 import { openModal } from "../../../../app/common/modals/modalReducer";
-import useStorage from "../../../../app/hooks/useStorage";
-import {
-  dataFromURL,
-  getAudioFromStorage,
-} from "../../../../app/storage/storageService";
-import {
-  downloadAudio,
-  getAudioRef,
-  pauseAudio,
-  playAudio,
-} from "../../../audioActions";
+
 import ProjectInfo from "../../../Home Projects/ProjectInfo";
 
 export default function VersionPlayInfo({ versions }) {

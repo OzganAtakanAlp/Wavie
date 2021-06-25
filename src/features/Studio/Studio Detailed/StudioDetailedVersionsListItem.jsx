@@ -1,8 +1,8 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import { Divider, Item, Menu } from "semantic-ui-react";
-import { getAudioRef } from "../../audioActions";
+
 import { SelectedProjectId } from "../../sidebarReducer";
 
 export default function StudioDetailedVersionsListItem({ version }) {

@@ -1,19 +1,15 @@
-import React, { version } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Grid } from "semantic-ui-react";
 import StudioDetailedVersionsList from "./StudioDetailedVersionsList";
-import VersionPlayInfo from "./Version Detailed/VersionPlayInfo";
+
 import ProjectListItemPlaceholder from "../../Home Projects/ProjectListItemPlaceholder";
 import useFirestoreVersions from "../../../app/hooks/useFirestoreVersions";
 import { listentoVersionsFromFirestore } from "../../../app/firestore/firestoreService";
 
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import { NavLink, Redirect, Router } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { listenToVersions } from "../../versionActions";
-import useStorage from "../../../app/hooks/useStorage";
-import { getAudioFromStorage } from "../../../app/storage/storageService";
-import { downloadAudio } from "../../audioActions";
-import { openModal } from "../../../app/common/modals/modalReducer";
 
 export default function StudioDetailedPage({ match }) {
   const project = useSelector((state) =>

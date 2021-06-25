@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, Grid, Icon, Segment } from "semantic-ui-react";
 
-export default function ProjectDetailedInfo({ project }) {
+export default function ProjectDetailedInfo({ release }) {
+  console.log(release);
   return (
     <Segment.Group>
       <Segment attached='top'>
@@ -10,7 +11,7 @@ export default function ProjectDetailedInfo({ project }) {
             <Icon size='large' color='teal' name='info' />
           </Grid.Column>
           <Grid.Column width={15}>
-            <p>{project.description}</p>
+            {/* <p>{release.description || null}</p> */}
           </Grid.Column>
         </Grid>
       </Segment>
@@ -20,7 +21,7 @@ export default function ProjectDetailedInfo({ project }) {
             <Icon name='calendar' size='large' color='teal' />
           </Grid.Column>
           <Grid.Column width={15}>
-            <span>{project.date}</span>
+            <span>{release.date_created}</span>
           </Grid.Column>
         </Grid>
       </Segment>
@@ -30,7 +31,7 @@ export default function ProjectDetailedInfo({ project }) {
             <Icon name='marker' size='large' color='teal' />
           </Grid.Column>
           <Grid.Column width={11}>
-            <span>{project.venue}</span>
+            {/* <span>{release.venue || null}</span> */}
           </Grid.Column>
           <Grid.Column width={4}>
             <Button color='teal' size='tiny' content='Show Map' />

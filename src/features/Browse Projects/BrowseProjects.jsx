@@ -9,6 +9,7 @@ import {
   getProjectsFromFirestore,
   getVersionsFromFirestore,
   listenToProjectsFromFirestore,
+  listenToReleasesFromFirestore,
 } from "../../app/firestore/firestoreService";
 import { listenToProjects } from "../projectActions";
 import { listenToVersions } from "../versionActions";
@@ -18,10 +19,12 @@ import {
   asyncActionStart,
 } from "../../app/async/asyncReducer";
 import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
+import { listenToReleases } from "../releaseActions";
 
 export default function BrowseProjects() {
   const { projects } = useSelector((state) => state.project);
   const { loading } = useSelector((state) => state.async);
+  const { releases } = useSelector((state) => state.release);
 
   const { currentUser } = useSelector((state) => state.auth);
 
@@ -30,6 +33,11 @@ export default function BrowseProjects() {
   useFirestoreCollection({
     query: () => listenToProjectsFromFirestore(),
     data: (projects) => dispatch(listenToProjects(projects)),
+    deps: [dispatch],
+  });
+  useFirestoreCollection({
+    query: () => listenToReleasesFromFirestore(),
+    data: (releases) => dispatch(listenToReleases(releases)),
     deps: [dispatch],
   });
 
@@ -45,7 +53,7 @@ export default function BrowseProjects() {
             <ProjectListItemPlaceholder />
           </>
         )}
-        <ProjectList projects={projects} />
+        <ProjectList releases={releases} />
       </GridColumn>
     </Grid>
   );

@@ -1,17 +1,19 @@
 import React from "react";
 import { Grid, GridColumn } from "semantic-ui-react";
-import ProjectList from "./ProjectList";
+import ProjectList from "../../features/Home Projects/ProjectList";
 import { useDispatch, useSelector } from "react-redux";
-import ProjectListItemPlaceholder from "./ProjectListItemPlaceholder";
-import ProjectFilters from "./ProjectFilters";
+import ProjectListItemPlaceholder from "../../features/Home Projects/ProjectListItemPlaceholder";
+import ProjectFilters from "../../features/Home Projects/ProjectFilters";
 import {
+  listenToGroupsFromFirestore,
   listenToProjectsFromFirestore,
   listenToReleasesFromFirestore,
 } from "../../app/firestore/firestoreService";
 import { listenToProjects } from "../projectActions";
 import { listenToReleases } from "../releaseActions";
 import useFirestoreCollection from "../../app/hooks/useFirestoreCollection";
-
+import { listenToGroups } from "../groupActions";
+import GroupList from "./GroupList";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 
 export default function HomeProjects() {
@@ -19,7 +21,7 @@ export default function HomeProjects() {
   const { releases } = useSelector((state) => state.release);
   const { loading, error } = useSelector((state) => state.async);
   const { currentUser } = useSelector((state) => state.auth);
-  const { currentUserProfile } = useSelector((state) => state.profile);
+  const { groups } = useSelector((state) => state.group);
   const dispatch = useDispatch();
 
   useFirestoreCollection({
@@ -29,18 +31,16 @@ export default function HomeProjects() {
   });
 
   useFirestoreCollection({
-    query: () => listenToReleasesFromFirestore(),
-    data: (releases) => dispatch(listenToReleases(releases)),
+    query: () => listenToGroupsFromFirestore(),
+    data: (groups) => dispatch(listenToGroups(groups)),
     deps: [dispatch],
   });
-
-  if ((loading && !releases) || (!releases && !error))
+  console.log(groups);
+  if ((loading && !groups) || (!releases && !error))
     return <LoadingComponent content='Loading the profile...' />;
   return (
     <Grid>
-      <GridColumn width={5}>
-        <ProjectFilters />
-      </GridColumn>
+      <GridColumn width={5}>{/* <ProjectFilters /> */}</GridColumn>
       <GridColumn width={7}>
         {loading && (
           <>
@@ -48,7 +48,7 @@ export default function HomeProjects() {
             <ProjectListItemPlaceholder />
           </>
         )}
-        <ProjectList releases={releases} />
+        <GroupList groups={groups} />
       </GridColumn>
     </Grid>
   );

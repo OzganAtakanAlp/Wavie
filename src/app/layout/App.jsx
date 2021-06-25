@@ -17,6 +17,9 @@ import AccountPage from "../../features/auth/AccountPage";
 import ErrorComponent from "../common/errors/ErrorComponent";
 import StudioDetailedPage from "../../features/Studio/Studio Detailed/StudioDetailedPage";
 import VersionsPlayInfo from "../../features/Studio/Studio Detailed/Version Detailed/VersionPlayInfo";
+import GroupsPage from "../../features/Groups/GroupsPage";
+import GroupCreate from "../../features/Groups/GroupCreate";
+import GroupDetailed from "../../features/Groups/GroupDetailed";
 import { StudioDetailedLayout } from "./StudioDetailedLayout";
 import { useSelector } from "react-redux";
 import LoadingComponent from "./LoadingComponent";
@@ -41,6 +44,8 @@ export default function App() {
               <Route exact path='/sandbox' component={Sandbox} />
               <Route path='/browse' component={BrowseProjects} />
               <Route path='/studio' component={StudioPage} />
+              <Route path='/groups' component={GroupsPage} />
+              <Route path='/createGroup' component={GroupCreate} />
               <Route path='/signUp' component={SignUpPage} />
               <Route path='/profile/:id' component={ProfilePage} />
               <Route path='/account' component={AccountPage} />
@@ -50,6 +55,7 @@ export default function App() {
                 path='/projects/:id'
                 component={ProjectDetailedPage}
               />
+              <Route exact path='/groups/:id' component={GroupDetailed} />
 
               <Route
                 exact

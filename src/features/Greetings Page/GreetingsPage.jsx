@@ -1,15 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  Button,
-  Container,
-  Header,
-  Icon,
-  Image,
-  Label,
-  Segment,
-} from "semantic-ui-react";
+import { Container, Header, Image, Label, Segment } from "semantic-ui-react";
 import AuthLoginForm from "./AuthLoginForm";
 
 export default function GreetingsPage({ history }) {

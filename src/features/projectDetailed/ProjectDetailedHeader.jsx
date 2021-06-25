@@ -15,9 +15,7 @@ const eventImageTextStyle = {
   color: "white",
 };
 
-export default function ProjectDetailedHeader({ project }) {
-  const settings = project.project_settings_static;
-
+export default function ProjectDetailedHeader({ release }) {
   return (
     <Segment.Group>
       <Segment basic attached='top' style={{ padding: "0" }}>
@@ -33,12 +31,12 @@ export default function ProjectDetailedHeader({ project }) {
               <Item.Content>
                 <Header
                   size='huge'
-                  content={settings.project_name}
+                  content={release.project_name}
                   style={{ color: "white" }}
                 />
-                <p>{settings.date_created}</p>
+                <p>{release.date_created}</p>
                 <p>
-                  Brainchild of: <strong>{settings.creator_id}</strong>
+                  Brainchild of: <strong>{release.creator_id}</strong>
                 </p>
               </Item.Content>
             </Item>
@@ -47,17 +45,17 @@ export default function ProjectDetailedHeader({ project }) {
       </Segment>
 
       <Segment attached='bottom'>
-        <Button>Cancel My Place</Button>
-        <Button color='teal'>JOIN THIS EVENT</Button>
+        <Button>Leave</Button>
+        <Button color='teal'>Ask to participate</Button>
 
-        <Button
+        {/* <Button
           as={Link}
-          to={`/studioDetailed/${project.id}}`}
+          to={`/studioDetailed/${release.id}}`}
           color='orange'
           floated='right'
         >
           Manage Event
-        </Button>
+        </Button> */}
       </Segment>
     </Segment.Group>
   );

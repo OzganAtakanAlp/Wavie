@@ -19,10 +19,11 @@ export default function NavBar({ history }) {
         <Menu.Item as={NavLink} to='/home' name='Home' />
         <Menu.Item as={NavLink} to='/browse' name='Browse' />
         <Menu.Item as={NavLink} to='/studio' name='Studio' />
-        <Menu.Item as={NavLink} to='/sandbox' name='Sandbox' />
+        <Menu.Item as={NavLink} to='/groups' name='Groups' />
+
         {authenticated && (
-          <Menu.Item as={NavLink} to='/studio'>
-            <Button inverted content='Create a project' />
+          <Menu.Item as={NavLink} to='/createGroup'>
+            <Button inverted content='Create a group' />
           </Menu.Item>
         )}
         {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
