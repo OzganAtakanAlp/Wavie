@@ -16,19 +16,9 @@ export default function VersionPlayInfo({ versions }) {
   console.log(versionId);
 
   console.log(versions[Math.abs(versionId - versions.length)]);
-  const audioElement = new Audio(
-    "/assets/giorno's theme but only the best part is in.wav"
-  );
 
   const audioUrl = versions[Math.abs(versionId - versions.length)].audioUrl;
   console.log(audioUrl);
-
-  function handlePlay() {
-    audioElement.play();
-  }
-  function handlePause() {
-    audioElement.pause();
-  }
 
   return (
     <>
@@ -47,10 +37,6 @@ export default function VersionPlayInfo({ versions }) {
             <ProjectInfo versions={versions} />
 
             {audioUrl && <audio src={audioUrl} preload='auto' controls />}
-
-            <Button icon='play' onClick={handlePlay} />
-
-            <Button icon='pause' onClick={handlePause} />
           </Segment.Group>
         </Grid.Column>
         <Grid.Column width={6}>

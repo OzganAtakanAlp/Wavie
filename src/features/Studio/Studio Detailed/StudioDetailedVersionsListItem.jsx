@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { Divider, Item, Menu } from "semantic-ui-react";
+import { Divider, Item } from "semantic-ui-react";
 
 import { SelectedProjectId } from "../../sidebarReducer";
 

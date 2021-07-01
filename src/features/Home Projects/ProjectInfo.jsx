@@ -38,15 +38,21 @@ export default function ProjectInfo({ versions }) {
 
   return (
     <List>
-      <Label>
-        {versions[Math.abs(versionId - versions.length)].project_style}
-      </Label>
-      <Label>
-        {versions[Math.abs(versionId - versions.length)].project_bpm}
-      </Label>
-      <Label>
-        {versions[Math.abs(versionId - versions.length)].project_key}
-      </Label>
+      {versions[Math.abs(versionId - versions.length)].project_style && (
+        <Label>
+          {versions[Math.abs(versionId - versions.length)].project_style}
+        </Label>
+      )}
+      {versions[Math.abs(versionId - versions.length)].project_bpm && (
+        <Label>
+          {versions[Math.abs(versionId - versions.length)].project_bpm}
+        </Label>
+      )}
+      {versions[Math.abs(versionId - versions.length)].project_key && (
+        <Label>
+          {versions[Math.abs(versionId - versions.length)].project_key}
+        </Label>
+      )}
     </List>
   );
 }
